@@ -1,0 +1,24 @@
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - jruby
+gemfile:
+  - gemfiles/rails-3.2/Gemfile.postgresql
+  - gemfiles/rails-3.2/Gemfile.sqlite3
+  - gemfiles/rails-4.0/Gemfile.postgresql
+  - gemfiles/rails-4.0/Gemfile.sqlite3
+  - gemfiles/rails-edge/Gemfile.postgresql
+  - gemfiles/rails-edge/Gemfile.sqlite3
+before_script:
+  - rake create_databases
+after_script:
+  - rake drop_databases
+notifications:
+  recipients:
+    - michal.lomnicki@gmail.com
+    - ronen@barzel.org
+matrix:
+  allow_failures:
+    - gemfile: gemfiles/rails-edge/Gemfile.postgresql
+    - gemfile: gemfiles/rails-edge/Gemfile.sqlite3
+  
