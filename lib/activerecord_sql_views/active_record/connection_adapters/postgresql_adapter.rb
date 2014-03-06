@@ -6,7 +6,7 @@ module ActiveRecordSqlViews
           sql = <<-SQL
             SELECT viewname
               FROM pg_views
-            WHERE schemaname = ANY (current_schemas(false))
+            WHERE schemaname = ANY (current_schemas(false)) and viewowner != 'postgres'
           SQL
           sql += " AND schemaname != 'postgis'" if adapter_name == 'PostGIS'
           query(sql, name).map { |row| row[0] }
